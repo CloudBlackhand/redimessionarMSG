@@ -41,11 +41,6 @@ app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.use('/api', apiRoutes);
 app.use('/webhook', webhookRoutes);
 
-// Rota para servir o frontend (SPA)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
-
 // Middleware de tratamento de erros
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Erro não tratado:', err);
@@ -56,13 +51,9 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   });
 });
 
-// Middleware para rotas não encontradas
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Rota não encontrada',
-    path: req.originalUrl
-  });
+// Rota para servir o frontend (SPA) - deve vir por último
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 
