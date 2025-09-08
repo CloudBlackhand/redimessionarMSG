@@ -9,8 +9,8 @@ COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
 # Install dependencies
-RUN npm ci --only=production
-RUN cd frontend && npm ci --only=production
+RUN npm install --omit=dev
+RUN cd frontend && npm install --omit=dev
 
 # Copy source code
 COPY . .
