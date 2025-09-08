@@ -4,12 +4,13 @@
   "description": "Sistema de configuração para bot WhatsApp com WAHA NOWEB",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:frontend && tsc",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "dev:frontend": "cd frontend && npm run dev",
-    "build:frontend": "cd frontend && npm run build",
-    "install:all": "npm install && cd frontend && npm install"
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "install:all": "npm install && cd frontend && npm install",
+    "postinstall": "npm run build:frontend"
   },
   "keywords": ["whatsapp", "bot", "waha", "railway"],
   "author": "Sistema WhatsApp Bot",
