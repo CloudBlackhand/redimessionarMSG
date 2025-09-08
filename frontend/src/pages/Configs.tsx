@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Edit, Trash2 } from 'lucide-react';
 import { apiService } from '../services/api';
-import { BotConfig, FormField } from '../types';
+import { BotConfig } from '../types';
 import toast from 'react-hot-toast';
 import ConfigModal from '../components/ConfigModal';
 
