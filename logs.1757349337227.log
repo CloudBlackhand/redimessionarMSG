@@ -1,0 +1,374 @@
+2025-09-08T16:05:45.000000000Z [inf]  Starting Container
+2025-09-08T16:05:46.571288856Z [inf]  
+2025-09-08T16:05:46.571294473Z [inf]  > whatsapp-bot-config@1.0.0 start
+2025-09-08T16:05:46.571300667Z [inf]  > node dist/server.js
+2025-09-08T16:05:46.571307399Z [inf]  
+2025-09-08T16:05:46.695566249Z [inf]  ✅ Conectado ao PostgreSQL
+2025-09-08T16:05:46.705716528Z [inf]  📋 Tabelas do banco de dados inicializadas
+2025-09-08T16:05:46.709455070Z [inf]  🚀 Servidor rodando na porta 3000
+2025-09-08T16:05:46.709459855Z [inf]  📱 Ambiente: production
+2025-09-08T16:05:46.709464148Z [inf]  🔗 WAHA URL: https://wahawa-production-a06b.up.railway.app
+2025-09-08T16:05:46.709468927Z [inf]  🤖 Sessão: default
+2025-09-08T16:05:46.709473015Z [inf]  🌐 Frontend: http://localhost:3000
+2025-09-08T16:05:46.709477700Z [inf]  📡 API: http://localhost:3000/api
+2025-09-08T16:05:46.709482134Z [inf]  🔔 Webhook: http://localhost:3000/webhook
+2025-09-08T16:05:49.366599723Z [err]  Erro ao obter status da sessão: AxiosError: Request failed with status code 404
+2025-09-08T16:05:49.366604879Z [err]      at settle (/app/node_modules/axios/dist/node/axios.cjs:2090:12)
+2025-09-08T16:05:49.366610622Z [err]      at IncomingMessage.handleStreamEnd (/app/node_modules/axios/dist/node/axios.cjs:3207:11)
+2025-09-08T16:05:49.366615881Z [err]      at IncomingMessage.emit (node:events:529:35)
+2025-09-08T16:05:49.366622146Z [err]      at endReadableNT (node:internal/streams/readable:1400:12)
+2025-09-08T16:05:49.366627239Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-09-08T16:05:49.366633023Z [err]      at Axios.request (/app/node_modules/axios/dist/node/axios.cjs:4317:41)
+2025-09-08T16:05:49.366638043Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-08T16:05:49.366643232Z [err]      at async WahaService.getSessionStatus (/app/dist/services/wahaService.js:23:30)
+2025-09-08T16:05:49.366648942Z [err]      at async /app/dist/routes/api.js:242:24 {
+2025-09-08T16:05:49.366654021Z [err]    code: 'ERR_BAD_REQUEST',
+2025-09-08T16:05:49.366659098Z [err]    config: {
+2025-09-08T16:05:49.366664754Z [err]      transitional: {
+2025-09-08T16:05:49.366669401Z [err]        silentJSONParsing: true,
+2025-09-08T16:05:49.366673836Z [err]        forcedJSONParsing: true,
+2025-09-08T16:05:49.366677689Z [err]        clarifyTimeoutError: false
+2025-09-08T16:05:49.366681596Z [err]      },
+2025-09-08T16:05:49.366686150Z [err]      adapter: [ 'xhr', 'http', 'fetch' ],
+2025-09-08T16:05:49.366690202Z [err]      transformRequest: [ [Function: transformRequest] ],
+2025-09-08T16:05:49.366693948Z [err]      transformResponse: [ [Function: transformResponse] ],
+2025-09-08T16:05:49.366699062Z [err]      timeout: 30000,
+2025-09-08T16:05:49.366969857Z [err]      xsrfCookieName: 'XSRF-TOKEN',
+2025-09-08T16:05:49.366976665Z [err]      xsrfHeaderName: 'X-XSRF-TOKEN',
+2025-09-08T16:05:49.366982067Z [err]      maxContentLength: -1,
+2025-09-08T16:05:49.366986961Z [err]      maxBodyLength: -1,
+2025-09-08T16:05:49.366992925Z [err]      },
+2025-09-08T16:05:49.366999814Z [err]      _events: [Object: null prototype] {
+2025-09-08T16:05:49.367004947Z [err]      baseURL: 'https://wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.367007170Z [err]        abort: [Function (anonymous)],
+2025-09-08T16:05:49.367013010Z [err]        aborted: [Function (anonymous)],
+2025-09-08T16:05:49.367014106Z [err]      method: 'get',
+2025-09-08T16:05:49.367019494Z [err]        connect: [Function (anonymous)],
+2025-09-08T16:05:49.367023079Z [err]      url: '/api/sessions/default/status',
+2025-09-08T16:05:49.367029297Z [err]    },
+2025-09-08T16:05:49.367034645Z [err]      allowAbsoluteUrls: true,
+2025-09-08T16:05:49.367035526Z [err]    request: <ref *1> ClientRequest {
+2025-09-08T16:05:49.367042300Z [err]        finish: [Function: requestOnFinish]
+2025-09-08T16:05:49.367047040Z [err]      outputData: [],
+2025-09-08T16:05:49.367047752Z [err]      data: undefined
+2025-09-08T16:05:49.367053754Z [err]      outputSize: 0,
+2025-09-08T16:05:49.367057402Z [err]      },
+2025-09-08T16:05:49.367057689Z [err]      env: { FormData: [Function [FormData]], Blob: [class Blob] },
+2025-09-08T16:05:49.367064091Z [err]      writable: true,
+2025-09-08T16:05:49.367067592Z [err]      _eventsCount: 7,
+2025-09-08T16:05:49.367069128Z [err]        error: [Function (anonymous)],
+2025-09-08T16:05:49.367069477Z [err]      validateStatus: [Function: validateStatus],
+2025-09-08T16:05:49.367073905Z [err]      destroyed: false,
+2025-09-08T16:05:49.367077281Z [err]      _maxListeners: undefined,
+2025-09-08T16:05:49.367078907Z [err]      headers: Object [AxiosHeaders] {
+2025-09-08T16:05:49.367079785Z [err]        socket: [Function (anonymous)],
+2025-09-08T16:05:49.367082178Z [err]      _last: true,
+2025-09-08T16:05:49.367087513Z [err]        Accept: 'application/json, text/plain, */*',
+2025-09-08T16:05:49.367091032Z [err]        timeout: [Function (anonymous)],
+2025-09-08T16:05:49.367091418Z [err]        ssl: [TLSWrap],
+2025-09-08T16:05:49.367092434Z [err]      useChunkedEncodingByDefault: false,
+2025-09-08T16:05:49.367098246Z [err]        'Content-Type': 'application/json',
+2025-09-08T16:05:49.367101177Z [err]        _requestCert: true,
+2025-09-08T16:05:49.367101295Z [err]      chunkedEncoding: false,
+2025-09-08T16:05:49.367102117Z [err]      sendDate: false,
+2025-09-08T16:05:49.367107659Z [err]        'X-API-Key': 'test-api-key',
+2025-09-08T16:05:49.367107933Z [err]        _rejectUnauthorized: true,
+2025-09-08T16:05:49.367111063Z [err]      _removedConnection: false,
+2025-09-08T16:05:49.367112632Z [err]      shouldKeepAlive: false,
+2025-09-08T16:05:49.367115035Z [err]        parser: null,
+2025-09-08T16:05:49.367117076Z [err]        'User-Agent': 'axios/1.11.0',
+2025-09-08T16:05:49.367120345Z [err]      _removedContLen: false,
+2025-09-08T16:05:49.367120666Z [err]      maxRequestsOnConnectionReached: false,
+2025-09-08T16:05:49.367128264Z [err]        'Accept-Encoding': 'gzip, compress, deflate, br'
+2025-09-08T16:05:49.367129484Z [err]      _removedTE: false,
+2025-09-08T16:05:49.367129727Z [err]      _defaultKeepAlive: true,
+2025-09-08T16:05:49.367137600Z [err]      strictContentLength: false,
+2025-09-08T16:05:49.367143586Z [err]        _httpMessage: [Circular *1],
+2025-09-08T16:05:49.367145628Z [err]      _contentLength: 0,
+2025-09-08T16:05:49.367152938Z [err]        timeout: 30000,
+2025-09-08T16:05:49.367153366Z [err]      _hasBody: true,
+2025-09-08T16:05:49.367160587Z [err]        [Symbol(alpncallback)]: null,
+2025-09-08T16:05:49.367162324Z [err]      _trailer: '',
+2025-09-08T16:05:49.367168199Z [err]        [Symbol(res)]: [TLSWrap],
+2025-09-08T16:05:49.367171135Z [err]      finished: true,
+2025-09-08T16:05:49.367176580Z [err]        [Symbol(verified)]: true,
+2025-09-08T16:05:49.367179403Z [err]      _headerSent: true,
+2025-09-08T16:05:49.367183323Z [err]        [Symbol(pendingSession)]: null,
+2025-09-08T16:05:49.367188097Z [err]      _closed: false,
+2025-09-08T16:05:49.367190432Z [err]        [Symbol(async_id_symbol)]: 75,
+2025-09-08T16:05:49.367195841Z [err]      socket: TLSSocket {
+2025-09-08T16:05:49.367198068Z [err]        [Symbol(kHandle)]: [TLSWrap],
+2025-09-08T16:05:49.367204338Z [err]        _tlsOptions: [Object],
+2025-09-08T16:05:49.367205414Z [err]        [Symbol(lastWriteQueueSize)]: 0,
+2025-09-08T16:05:49.367212437Z [err]        [Symbol(timeout)]: Timeout {
+2025-09-08T16:05:49.367212697Z [err]        _secureEstablished: true,
+2025-09-08T16:05:49.367218239Z [err]          _idleTimeout: 30000,
+2025-09-08T16:05:49.367221321Z [err]        _securePending: false,
+2025-09-08T16:05:49.367224183Z [err]          _idlePrev: [TimersList],
+2025-09-08T16:05:49.367228036Z [err]        _newSessionPending: false,
+2025-09-08T16:05:49.367234041Z [err]        _controlReleased: true,
+2025-09-08T16:05:49.367239709Z [err]        secureConnecting: false,
+2025-09-08T16:05:49.367245234Z [err]        _SNICallback: null,
+2025-09-08T16:05:49.367251769Z [err]        servername: 'wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.367259268Z [err]        alpnProtocol: false,
+2025-09-08T16:05:49.367265416Z [err]        authorized: true,
+2025-09-08T16:05:49.367271166Z [err]        authorizationError: null,
+2025-09-08T16:05:49.367278321Z [err]        encrypted: true,
+2025-09-08T16:05:49.367285247Z [err]        _events: [Object: null prototype],
+2025-09-08T16:05:49.367291027Z [err]        _eventsCount: 10,
+2025-09-08T16:05:49.367296967Z [err]        connecting: false,
+2025-09-08T16:05:49.367303640Z [err]        _hadError: false,
+2025-09-08T16:05:49.367309104Z [err]        _parent: null,
+2025-09-08T16:05:49.367315074Z [err]        _host: 'wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.367322211Z [err]        _closeAfterHandlingError: false,
+2025-09-08T16:05:49.367328157Z [err]        _readableState: [ReadableState],
+2025-09-08T16:05:49.367334157Z [err]        _maxListeners: undefined,
+2025-09-08T16:05:49.367340984Z [err]        _writableState: [WritableState],
+2025-09-08T16:05:49.367346839Z [err]        allowHalfOpen: false,
+2025-09-08T16:05:49.367352892Z [err]        _sockname: null,
+2025-09-08T16:05:49.367358537Z [err]        _pendingData: null,
+2025-09-08T16:05:49.367364341Z [err]        _pendingEncoding: '',
+2025-09-08T16:05:49.367370239Z [err]        server: undefined,
+2025-09-08T16:05:49.367375933Z [err]        _server: null,
+2025-09-08T16:05:49.368263327Z [err]          _idleNext: [Timeout],
+2025-09-08T16:05:49.368272410Z [err]          _idleStart: 3128,
+2025-09-08T16:05:49.368278464Z [err]          _onTimeout: [Function: bound ],
+2025-09-08T16:05:49.368284136Z [err]          _timerArgs: undefined,
+2025-09-08T16:05:49.368289624Z [err]          _repeat: null,
+2025-09-08T16:05:49.368295194Z [err]          _destroyed: false,
+2025-09-08T16:05:49.368301786Z [err]          [Symbol(refed)]: false,
+2025-09-08T16:05:49.368307360Z [err]          [Symbol(kHasPrimitive)]: false,
+2025-09-08T16:05:49.368312543Z [err]          [Symbol(asyncId)]: 83,
+2025-09-08T16:05:49.368318261Z [err]          [Symbol(triggerId)]: 78
+2025-09-08T16:05:49.368324048Z [err]        },
+2025-09-08T16:05:49.368329427Z [err]        [Symbol(kBuffer)]: null,
+2025-09-08T16:05:49.368334897Z [err]        [Symbol(kBufferCb)]: null,
+2025-09-08T16:05:49.368341079Z [err]        [Symbol(kBufferGen)]: null,
+2025-09-08T16:05:49.368346517Z [err]        [Symbol(kCapture)]: false,
+2025-09-08T16:05:49.368352149Z [err]        [Symbol(kSetNoDelay)]: false,
+2025-09-08T16:05:49.368358115Z [err]        [Symbol(kSetKeepAlive)]: true,
+2025-09-08T16:05:49.368362468Z [err]      _redirectable: Writable {
+2025-09-08T16:05:49.368365295Z [err]        [Symbol(kSetKeepAliveInitialDelay)]: 60,
+2025-09-08T16:05:49.368370500Z [err]        [Symbol(kCapture)]: false
+2025-09-08T16:05:49.368372544Z [err]        _writableState: [WritableState],
+2025-09-08T16:05:49.368373880Z [err]        [Symbol(kBytesRead)]: 0,
+2025-09-08T16:05:49.368378490Z [err]      },
+2025-09-08T16:05:49.368379679Z [err]        _events: [Object: null prototype],
+2025-09-08T16:05:49.368381552Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-09-08T16:05:49.368385977Z [err]      [Symbol(kCapture)]: false,
+2025-09-08T16:05:49.368386274Z [err]        _eventsCount: 3,
+2025-09-08T16:05:49.368390025Z [err]        [Symbol(connect-options)]: [Object]
+2025-09-08T16:05:49.368392538Z [err]      [Symbol(kBytesWritten)]: 0,
+2025-09-08T16:05:49.368394108Z [err]        'accept-encoding': [Array],
+2025-09-08T16:05:49.368396324Z [err]        server: 'railway-edge',
+2025-09-08T16:05:49.368399755Z [err]      [Symbol(kNeedDrain)]: false,
+2025-09-08T16:05:49.368400420Z [err]      },
+2025-09-08T16:05:49.368402886Z [err]      [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-09-08T16:05:49.368404820Z [err]        host: [Array]
+2025-09-08T16:05:49.368406142Z [err]      [Symbol(corked)]: 0,
+2025-09-08T16:05:49.368409975Z [err]      _header: 'GET /api/sessions/default/status HTTP/1.1\r\n' +
+2025-09-08T16:05:49.368415470Z [err]        _maxListeners: undefined,
+2025-09-08T16:05:49.368415493Z [err]      [Symbol(kOutHeaders)]: [Object: null prototype] {
+2025-09-08T16:05:49.368415893Z [err]      },
+2025-09-08T16:05:49.368416033Z [err]      [Symbol(kUniqueHeaders)]: null
+2025-09-08T16:05:49.368418509Z [err]      statusText: 'Not Found',
+2025-09-08T16:05:49.368418687Z [err]        'Accept: application/json, text/plain, */*\r\n' +
+2025-09-08T16:05:49.368424803Z [err]      [Symbol(errored)]: null,
+2025-09-08T16:05:49.368426852Z [err]        _options: [Object],
+2025-09-08T16:05:49.368427632Z [err]      headers: Object [AxiosHeaders] {
+2025-09-08T16:05:49.368427719Z [err]        'content-type': 'application/json; charset=utf-8',
+2025-09-08T16:05:49.368427845Z [err]        'Content-Type: application/json\r\n' +
+2025-09-08T16:05:49.368427854Z [err]    },
+2025-09-08T16:05:49.368434655Z [err]      [Symbol(kHighWaterMark)]: 16384,
+2025-09-08T16:05:49.368434928Z [err]        'access-control-allow-origin': '*',
+2025-09-08T16:05:49.368435856Z [err]        'X-API-Key: test-api-key\r\n' +
+2025-09-08T16:05:49.368438334Z [err]    response: {
+2025-09-08T16:05:49.368441983Z [err]        date: 'Mon, 08 Sep 2025 16:05:49 GMT',
+2025-09-08T16:05:49.368444471Z [err]        'User-Agent: axios/1.11.0\r\n' +
+2025-09-08T16:05:49.368445753Z [err]        'content-length': '90',
+2025-09-08T16:05:49.368448577Z [err]      status: 404,
+2025-09-08T16:05:49.368452056Z [err]        _ended: true,
+2025-09-08T16:05:49.368453125Z [err]        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+2025-09-08T16:05:49.368454398Z [err]        accept: [Array],
+2025-09-08T16:05:49.368455016Z [err]        etag: 'W/"5a-6DwDiK+jen3A56UJbWupoyf/64Y"',
+2025-09-08T16:05:49.368461381Z [err]        _ending: true,
+2025-09-08T16:05:49.368461869Z [err]        'Host: wahawa-production-a06b.up.railway.app\r\n' +
+2025-09-08T16:05:49.368465294Z [err]        'content-type': [Array],
+2025-09-08T16:05:49.368470129Z [err]        'Connection: close\r\n' +
+2025-09-08T16:05:49.368470435Z [err]        _redirectCount: 0,
+2025-09-08T16:05:49.368473780Z [err]        'x-api-key': [Array],
+2025-09-08T16:05:49.368478176Z [err]        '\r\n',
+2025-09-08T16:05:49.368481112Z [err]        _redirects: [],
+2025-09-08T16:05:49.368481643Z [err]        'user-agent': [Array],
+2025-09-08T16:05:49.368485984Z [err]      _keepAliveTimeout: 0,
+2025-09-08T16:05:49.368489246Z [err]        _requestBodyLength: 0,
+2025-09-08T16:05:49.368493270Z [err]      _onPendingData: [Function: nop],
+2025-09-08T16:05:49.368496765Z [err]        _requestBodyBuffers: [],
+2025-09-08T16:05:49.368500695Z [err]      agent: Agent {
+2025-09-08T16:05:49.368504185Z [err]        _onNativeResponse: [Function (anonymous)],
+2025-09-08T16:05:49.368508088Z [err]        _events: [Object: null prototype],
+2025-09-08T16:05:49.368512401Z [err]        _currentRequest: [Circular *1],
+2025-09-08T16:05:49.368515241Z [err]        _eventsCount: 2,
+2025-09-08T16:05:49.368520471Z [err]        _currentUrl: 'https://wahawa-production-a06b.up.railway.app/api/sessions/default/status',
+2025-09-08T16:05:49.368522573Z [err]        _maxListeners: undefined,
+2025-09-08T16:05:49.368528464Z [err]        _timeout: null,
+2025-09-08T16:05:49.368529675Z [err]        defaultPort: 443,
+2025-09-08T16:05:49.368536264Z [err]        protocol: 'https:',
+2025-09-08T16:05:49.368543028Z [err]        options: [Object: null prototype],
+2025-09-08T16:05:49.368548658Z [err]        requests: [Object: null prototype] {},
+2025-09-08T16:05:49.368554667Z [err]        sockets: [Object: null prototype],
+2025-09-08T16:05:49.368560325Z [err]        freeSockets: [Object: null prototype] {},
+2025-09-08T16:05:49.368565708Z [err]        keepAliveMsecs: 1000,
+2025-09-08T16:05:49.368571122Z [err]        keepAlive: false,
+2025-09-08T16:05:49.368576571Z [err]        maxSockets: Infinity,
+2025-09-08T16:05:49.368581924Z [err]        maxFreeSockets: 256,
+2025-09-08T16:05:49.368587619Z [err]        scheduling: 'lifo',
+2025-09-08T16:05:49.368595735Z [err]        maxTotalSockets: Infinity,
+2025-09-08T16:05:49.368601396Z [err]        totalSocketCount: 1,
+2025-09-08T16:05:49.368606888Z [err]        maxCachedSessions: 100,
+2025-09-08T16:05:49.368612487Z [err]        _sessionCache: [Object],
+2025-09-08T16:05:49.368618052Z [err]        [Symbol(kCapture)]: false
+2025-09-08T16:05:49.368623530Z [err]      },
+2025-09-08T16:05:49.368628955Z [err]      socketPath: undefined,
+2025-09-08T16:05:49.368634765Z [err]      method: 'GET',
+2025-09-08T16:05:49.368640836Z [err]      maxHeaderSize: undefined,
+2025-09-08T16:05:49.368646220Z [err]      insecureHTTPParser: undefined,
+2025-09-08T16:05:49.368651466Z [err]      joinDuplicateHeaders: undefined,
+2025-09-08T16:05:49.368656909Z [err]      path: '/api/sessions/default/status',
+2025-09-08T16:05:49.368662157Z [err]      _ended: true,
+2025-09-08T16:05:49.368667665Z [err]      res: IncomingMessage {
+2025-09-08T16:05:49.368675108Z [err]        _readableState: [ReadableState],
+2025-09-08T16:05:49.368680573Z [err]        _events: [Object: null prototype],
+2025-09-08T16:05:49.368686285Z [err]        _eventsCount: 4,
+2025-09-08T16:05:49.368692207Z [err]        _maxListeners: undefined,
+2025-09-08T16:05:49.368697901Z [err]        socket: [TLSSocket],
+2025-09-08T16:05:49.368703684Z [err]        httpVersionMajor: 1,
+2025-09-08T16:05:49.368710138Z [err]        httpVersionMinor: 1,
+2025-09-08T16:05:49.368715794Z [err]        httpVersion: '1.1',
+2025-09-08T16:05:49.368721570Z [err]        complete: true,
+2025-09-08T16:05:49.368727205Z [err]        rawHeaders: [Array],
+2025-09-08T16:05:49.368732769Z [err]        rawTrailers: [],
+2025-09-08T16:05:49.368739148Z [err]        joinDuplicateHeaders: undefined,
+2025-09-08T16:05:49.368744485Z [err]        aborted: false,
+2025-09-08T16:05:49.368749582Z [err]        upgrade: false,
+2025-09-08T16:05:49.368755121Z [err]        url: '',
+2025-09-08T16:05:49.368760918Z [err]        method: null,
+2025-09-08T16:05:49.368766476Z [err]        statusCode: 404,
+2025-09-08T16:05:49.368772110Z [err]        statusMessage: 'Not Found',
+2025-09-08T16:05:49.368777517Z [err]        client: [TLSSocket],
+2025-09-08T16:05:49.368783357Z [err]        _consuming: false,
+2025-09-08T16:05:49.368789573Z [err]        _dumped: false,
+2025-09-08T16:05:49.368859785Z [err]        req: [Circular *1],
+2025-09-08T16:05:49.368866593Z [err]        responseUrl: 'https://wahawa-production-a06b.up.railway.app/api/sessions/default/status',
+2025-09-08T16:05:49.368872290Z [err]        redirects: [],
+2025-09-08T16:05:49.368878159Z [err]        [Symbol(kCapture)]: false,
+2025-09-08T16:05:49.368884072Z [err]        [Symbol(kHeaders)]: [Object],
+2025-09-08T16:05:49.368891148Z [err]        [Symbol(kHeadersCount)]: 20,
+2025-09-08T16:05:49.368899696Z [err]        [Symbol(kTrailers)]: null,
+2025-09-08T16:05:49.368906879Z [err]        [Symbol(kTrailersCount)]: 0
+2025-09-08T16:05:49.368913048Z [err]      },
+2025-09-08T16:05:49.368918616Z [err]      aborted: false,
+2025-09-08T16:05:49.368937635Z [err]      timeoutCb: null,
+2025-09-08T16:05:49.368947681Z [err]      upgradeOrConnect: false,
+2025-09-08T16:05:49.368953722Z [err]      parser: null,
+2025-09-08T16:05:49.368959343Z [err]      maxHeadersCount: null,
+2025-09-08T16:05:49.368964859Z [err]      reusedSocket: false,
+2025-09-08T16:05:49.368972076Z [err]      host: 'wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.368978140Z [err]      protocol: 'https:',
+2025-09-08T16:05:49.370142308Z [err]        'x-powered-by': 'Express',
+2025-09-08T16:05:49.370151107Z [err]        'x-railway-edge': 'railway/us-east4-eqdc4a',
+2025-09-08T16:05:49.370162977Z [err]        'x-railway-request-id': '8KLgVPIKRJi0gDDxAax-fw',
+2025-09-08T16:05:49.370168953Z [err]        connection: 'close'
+2025-09-08T16:05:49.370174507Z [err]      },
+2025-09-08T16:05:49.370180212Z [err]      config: {
+2025-09-08T16:05:49.370185661Z [err]        transitional: [Object],
+2025-09-08T16:05:49.370191255Z [err]        adapter: [Array],
+2025-09-08T16:05:49.370201110Z [err]        transformRequest: [Array],
+2025-09-08T16:05:49.370208419Z [err]        transformResponse: [Array],
+2025-09-08T16:05:49.370214314Z [err]        timeout: 30000,
+2025-09-08T16:05:49.370219589Z [err]        xsrfCookieName: 'XSRF-TOKEN',
+2025-09-08T16:05:49.370224961Z [err]        xsrfHeaderName: 'X-XSRF-TOKEN',
+2025-09-08T16:05:49.370230315Z [err]        maxContentLength: -1,
+2025-09-08T16:05:49.370235891Z [err]        maxBodyLength: -1,
+2025-09-08T16:05:49.370245260Z [err]        env: [Object],
+2025-09-08T16:05:49.370250880Z [err]        validateStatus: [Function: validateStatus],
+2025-09-08T16:05:49.370256777Z [err]        headers: [Object [AxiosHeaders]],
+2025-09-08T16:05:49.370262216Z [err]        baseURL: 'https://wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.370279493Z [err]        method: 'get',
+2025-09-08T16:05:49.370285183Z [err]        url: '/api/sessions/default/status',
+2025-09-08T16:05:49.370290574Z [err]        allowAbsoluteUrls: true,
+2025-09-08T16:05:49.370298999Z [err]        data: undefined
+2025-09-08T16:05:49.370307308Z [err]      },
+2025-09-08T16:05:49.370312681Z [err]      request: <ref *1> ClientRequest {
+2025-09-08T16:05:49.370319220Z [err]        _events: [Object: null prototype],
+2025-09-08T16:05:49.370324974Z [err]        _eventsCount: 7,
+2025-09-08T16:05:49.370331594Z [err]        _maxListeners: undefined,
+2025-09-08T16:05:49.370337163Z [err]        outputData: [],
+2025-09-08T16:05:49.370343528Z [err]        outputSize: 0,
+2025-09-08T16:05:49.370349039Z [err]        writable: true,
+2025-09-08T16:05:49.370355716Z [err]        destroyed: false,
+2025-09-08T16:05:49.370361001Z [err]        _last: true,
+2025-09-08T16:05:49.370366826Z [err]        chunkedEncoding: false,
+2025-09-08T16:05:49.370402527Z [err]        shouldKeepAlive: false,
+2025-09-08T16:05:49.370409232Z [err]        maxRequestsOnConnectionReached: false,
+2025-09-08T16:05:49.370415024Z [err]        _defaultKeepAlive: true,
+2025-09-08T16:05:49.370420577Z [err]        useChunkedEncodingByDefault: false,
+2025-09-08T16:05:49.370426013Z [err]        sendDate: false,
+2025-09-08T16:05:49.370431207Z [err]        _removedConnection: false,
+2025-09-08T16:05:49.370436578Z [err]        _removedContLen: false,
+2025-09-08T16:05:49.370442163Z [err]        _removedTE: false,
+2025-09-08T16:05:49.370447548Z [err]        strictContentLength: false,
+2025-09-08T16:05:49.370453003Z [err]        _contentLength: 0,
+2025-09-08T16:05:49.370458553Z [err]        _hasBody: true,
+2025-09-08T16:05:49.370465017Z [err]        _trailer: '',
+2025-09-08T16:05:49.370470694Z [err]        finished: true,
+2025-09-08T16:05:49.370476128Z [err]        _headerSent: true,
+2025-09-08T16:05:49.370481590Z [err]        _closed: false,
+2025-09-08T16:05:49.370487266Z [err]        socket: [TLSSocket],
+2025-09-08T16:05:49.370492670Z [err]        _header: 'GET /api/sessions/default/status HTTP/1.1\r\n' +
+2025-09-08T16:05:49.370499090Z [err]          'Accept: application/json, text/plain, */*\r\n' +
+2025-09-08T16:05:49.370506908Z [err]          'Content-Type: application/json\r\n' +
+2025-09-08T16:05:49.370513232Z [err]          'X-API-Key: test-api-key\r\n' +
+2025-09-08T16:05:49.370519587Z [err]          'User-Agent: axios/1.11.0\r\n' +
+2025-09-08T16:05:49.370525312Z [err]          'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+2025-09-08T16:05:49.370531871Z [err]          'Host: wahawa-production-a06b.up.railway.app\r\n' +
+2025-09-08T16:05:49.370538581Z [err]          'Connection: close\r\n' +
+2025-09-08T16:05:49.370544483Z [err]          '\r\n',
+2025-09-08T16:05:49.370551240Z [err]        _keepAliveTimeout: 0,
+2025-09-08T16:05:49.370556782Z [err]        _onPendingData: [Function: nop],
+2025-09-08T16:05:49.370562264Z [err]        agent: [Agent],
+2025-09-08T16:05:49.370568662Z [err]        socketPath: undefined,
+2025-09-08T16:05:49.370574282Z [err]        method: 'GET',
+2025-09-08T16:05:49.370579817Z [err]        maxHeaderSize: undefined,
+2025-09-08T16:05:49.370585738Z [err]        insecureHTTPParser: undefined,
+2025-09-08T16:05:49.370591598Z [err]        joinDuplicateHeaders: undefined,
+2025-09-08T16:05:49.370597188Z [err]        path: '/api/sessions/default/status',
+2025-09-08T16:05:49.370602622Z [err]        _ended: true,
+2025-09-08T16:05:49.370608250Z [err]        res: [IncomingMessage],
+2025-09-08T16:05:49.370614147Z [err]        aborted: false,
+2025-09-08T16:05:49.370620747Z [err]        timeoutCb: null,
+2025-09-08T16:05:49.370626532Z [err]        upgradeOrConnect: false,
+2025-09-08T16:05:49.370632719Z [err]        parser: null,
+2025-09-08T16:05:49.370638863Z [err]        maxHeadersCount: null,
+2025-09-08T16:05:49.370644785Z [err]        reusedSocket: false,
+2025-09-08T16:05:49.370651151Z [err]        host: 'wahawa-production-a06b.up.railway.app',
+2025-09-08T16:05:49.370657176Z [err]        protocol: 'https:',
+2025-09-08T16:05:49.370663179Z [err]        _redirectable: [Writable],
+2025-09-08T16:05:49.370669539Z [err]        [Symbol(kCapture)]: false,
+2025-09-08T16:05:49.370675802Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-09-08T16:05:49.370681581Z [err]        [Symbol(kNeedDrain)]: false,
+2025-09-08T16:05:49.370687228Z [err]        [Symbol(corked)]: 0,
+2025-09-08T16:05:49.370693037Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-09-08T16:05:49.370699200Z [err]        [Symbol(errored)]: null,
+2025-09-08T16:05:49.370704679Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-09-08T16:05:49.370710142Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-09-08T16:05:49.370716622Z [err]        [Symbol(kUniqueHeaders)]: null
+2025-09-08T16:05:49.370722117Z [err]      },
+2025-09-08T16:05:49.370727649Z [err]      data: {
+2025-09-08T16:05:49.370736428Z [err]        message: 'Cannot GET /api/sessions/default/status',
+2025-09-08T16:05:49.370742770Z [err]        error: 'Not Found',
+2025-09-08T16:05:49.370748357Z [err]        statusCode: 404
+2025-09-08T16:05:49.370754082Z [err]      }
+2025-09-08T16:05:49.370760119Z [err]    },
+2025-09-08T16:05:49.370765398Z [err]    status: 404
+2025-09-08T16:05:49.370774800Z [err]  }
