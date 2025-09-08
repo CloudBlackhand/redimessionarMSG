@@ -8,7 +8,7 @@ export const config = {
   
   waha: {
     baseUrl: process.env.WAHA_BASE_URL || 'http://localhost:3001',
-    apiKey: process.env.WAHA_API_KEY,
+    apiKey: process.env.WHATSAPP_API_KEY,
     sessionName: process.env.WHATSAPP_SESSION_NAME || 'bot-session',
   },
   
