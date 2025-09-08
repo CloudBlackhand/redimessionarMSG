@@ -9,7 +9,7 @@ const botService = new BotService();
 const logWebhook = (req: Request, res: Response, next: Function) => {
   console.log(`[WEBHOOK] ${req.method} ${req.path} - ${new Date().toISOString()}`);
   console.log(`[WEBHOOK] Body:`, JSON.stringify(req.body, null, 2));
-  next();
+  return next();
 };
 
 // Rota principal do webhook
@@ -61,7 +61,7 @@ router.post('/setup', async (req: Request, res: Response) => {
 
     // Aqui você pode implementar a lógica para configurar o webhook no WAHA
     // Por enquanto, apenas retornamos sucesso
-    res.json({
+    return res.json({
       success: true,
       message: 'Webhook configurado com sucesso',
       data: {
@@ -73,7 +73,7 @@ router.post('/setup', async (req: Request, res: Response) => {
     
   } catch (error) {
     console.error('Erro ao configurar webhook:', error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error: 'Erro ao configurar webhook'
     });

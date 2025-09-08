@@ -17,7 +17,7 @@ const authenticateApiKey = (req: Request, res: Response, next: Function) => {
     return res.status(401).json({ success: false, error: 'API Key inválida' });
   }
   
-  next();
+  return next();
 };
 
 // Schemas de validação
@@ -66,6 +66,14 @@ router.get('/configs', authenticateApiKey, (req: Request, res: Response) => {
 router.get('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      const response: ApiResponse = {
+        success: false,
+        error: 'ID é obrigatório',
+      };
+      return res.status(400).json(response);
+    }
+    
     const config = botService.getConfig(id);
     
     if (!config) {
@@ -80,13 +88,13 @@ router.get('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
       success: true,
       data: config,
     };
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao obter configuração',
     };
-    res.status(500).json(response);
+    return res.status(500).json(response);
   }
 });
 
@@ -97,7 +105,7 @@ router.post('/configs', authenticateApiKey, (req: Request, res: Response) => {
     if (error) {
       const response: ApiResponse = {
         success: false,
-        error: error.details[0].message,
+        error: error.details[0]?.message || 'Erro de validação',
       };
       return res.status(400).json(response);
     }
@@ -108,25 +116,33 @@ router.post('/configs', authenticateApiKey, (req: Request, res: Response) => {
       data: config,
       message: 'Configuração criada com sucesso',
     };
-    res.status(201).json(response);
+    return res.status(201).json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao criar configuração',
     };
-    res.status(500).json(response);
+    return res.status(500).json(response);
   }
 });
 
 router.put('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      const response: ApiResponse = {
+        success: false,
+        error: 'ID é obrigatório',
+      };
+      return res.status(400).json(response);
+    }
+    
     const { error, value } = botConfigSchema.validate(req.body);
     
     if (error) {
       const response: ApiResponse = {
         success: false,
-        error: error.details[0].message,
+        error: error.details[0]?.message || 'Erro de validação',
       };
       return res.status(400).json(response);
     }
@@ -146,19 +162,27 @@ router.put('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
       data: config,
       message: 'Configuração atualizada com sucesso',
     };
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao atualizar configuração',
     };
-    res.status(500).json(response);
+    return res.status(500).json(response);
   }
 });
 
 router.delete('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      const response: ApiResponse = {
+        success: false,
+        error: 'ID é obrigatório',
+      };
+      return res.status(400).json(response);
+    }
+    
     const deleted = botService.deleteConfig(id);
     
     if (!deleted) {
@@ -173,13 +197,13 @@ router.delete('/configs/:id', authenticateApiKey, (req: Request, res: Response) 
       success: true,
       message: 'Configuração excluída com sucesso',
     };
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao excluir configuração',
     };
-    res.status(500).json(response);
+    return res.status(500).json(response);
   }
 });
 
@@ -204,6 +228,14 @@ router.get('/submissions', authenticateApiKey, (req: Request, res: Response) => 
 router.get('/submissions/:id', authenticateApiKey, (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      const response: ApiResponse = {
+        success: false,
+        error: 'ID é obrigatório',
+      };
+      return res.status(400).json(response);
+    }
+    
     const submission = botService.getSubmission(id);
     
     if (!submission) {
@@ -218,13 +250,13 @@ router.get('/submissions/:id', authenticateApiKey, (req: Request, res: Response)
       success: true,
       data: submission,
     };
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao obter submissão',
     };
-    res.status(500).json(response);
+    return res.status(500).json(response);
   }
 });
 
