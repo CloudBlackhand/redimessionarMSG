@@ -4,13 +4,17 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
-# Install dependencies (including dev for build)
-RUN npm install
-RUN cd frontend && npm install
+# Install dependencies with cache
+RUN npm ci --only=production --ignore-scripts
+RUN cd frontend && npm ci --only=production --ignore-scripts
+
+# Install dev dependencies for build
+RUN npm install --only=dev
+RUN cd frontend && npm install --only=dev
 
 # Copy source code
 COPY . .
@@ -21,8 +25,9 @@ RUN cd frontend && npm run build
 # Build backend
 RUN npm run build
 
-# Remove only frontend dev dependencies (keep TypeScript in backend)
-RUN cd frontend && npm uninstall @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react-hooks eslint-plugin-react-refresh autoprefixer postcss tailwindcss typescript vite
+# Clean up dev dependencies
+RUN npm prune --production
+RUN cd frontend && npm prune --production
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
