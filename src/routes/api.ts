@@ -339,6 +339,66 @@ router.get('/waha/groups', authenticateApiKey, async (req: Request, res: Respons
   }
 });
 
+router.get('/waha/sessions', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const result = await wahaService.getSessions();
+    res.json(result);
+  } catch (error) {
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao obter sessões',
+    };
+    res.status(500).json(response);
+  }
+});
+
+router.delete('/waha/session', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const result = await wahaService.deleteSession();
+    res.json(result);
+  } catch (error) {
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao deletar sessão',
+    };
+    res.status(500).json(response);
+  }
+});
+
+router.post('/waha/session/restart', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const result = await wahaService.restartSession();
+    res.json(result);
+  } catch (error) {
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao reiniciar sessão',
+    };
+    res.status(500).json(response);
+  }
+});
+
+router.post('/waha/webhook', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const { webhookUrl } = req.body;
+    if (!webhookUrl) {
+      return res.status(400).json({
+        success: false,
+        error: 'webhookUrl é obrigatório'
+      });
+    }
+    
+    const result = await wahaService.configureWebhook(webhookUrl);
+    return res.json(result);
+  } catch (error) {
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao configurar webhook',
+    };
+    return res.status(500).json(response);
+  }
+});
+
 // Rota de teste
 router.get('/health', (req: Request, res: Response) => {
   const response: ApiResponse = {

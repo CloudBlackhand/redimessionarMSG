@@ -181,4 +181,48 @@ export class WahaService {
       return { success: false, error: 'Falha ao obter grupos' };
     }
   }
+
+  async configureWebhook(webhookUrl: string): Promise<ApiResponse> {
+    try {
+      const response = await this.client.post(`/api/${this.sessionName}/webhooks`, {
+        url: webhookUrl,
+        events: ['message', 'message.ack', 'session.status'],
+        webhookByEvents: true
+      });
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Erro ao configurar webhook:', error);
+      return { success: false, error: 'Falha ao configurar webhook' };
+    }
+  }
+
+  async getSessions(): Promise<ApiResponse> {
+    try {
+      const response = await this.client.get('/api/sessions');
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Erro ao obter sessões:', error);
+      return { success: false, error: 'Falha ao obter sessões' };
+    }
+  }
+
+  async deleteSession(): Promise<ApiResponse> {
+    try {
+      const response = await this.client.delete(`/api/sessions/${this.sessionName}`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Erro ao deletar sessão:', error);
+      return { success: false, error: 'Falha ao deletar sessão' };
+    }
+  }
+
+  async restartSession(): Promise<ApiResponse> {
+    try {
+      const response = await this.client.post(`/api/sessions/${this.sessionName}/restart`);
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Erro ao reiniciar sessão:', error);
+      return { success: false, error: 'Falha ao reiniciar sessão' };
+    }
+  }
 }

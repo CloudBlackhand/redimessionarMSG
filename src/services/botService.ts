@@ -71,10 +71,9 @@ export class BotService {
     // Verificar se é uma mensagem de saudação
     if (this.isGreetingMessage(messageText)) {
       await this.handleGreeting(message, config);
-    } else if (this.isFormSubmission(messageText)) {
-      await this.handleFormSubmission(message, config);
     } else {
-      await this.handleUnknownMessage(message, config);
+      // QUALQUER OUTRA MENSAGEM: redirecionar diretamente para o grupo
+      await this.handleDirectMessage(message, config);
     }
   }
 
@@ -163,11 +162,40 @@ export class BotService {
     }
   }
 
-  private async handleUnknownMessage(message: WhatsAppMessage, config: BotConfig): Promise<void> {
-    await this.wahaService.sendTextMessage(
-      message.from,
-      'Para iniciar, envie uma mensagem de saudação como "oi" ou "olá".'
-    );
+  private async handleDirectMessage(message: WhatsAppMessage, config: BotConfig): Promise<void> {
+    try {
+      // Criar submissão simples com a mensagem direta
+      const submission: FormSubmission = {
+        id: uuidv4(),
+        configId: config.id,
+        from: message.from,
+        formData: {
+          mensagem: message.body
+        },
+        submittedAt: new Date(),
+        forwardedToGroup: false,
+      };
+
+      this.submissions.set(submission.id, submission);
+
+      // Encaminhar para o grupo se configurado
+      if (config.targetGroupId) {
+        await this.forwardDirectMessageToGroup(message, config, submission);
+      }
+
+      // Confirmar recebimento
+      await this.wahaService.sendTextMessage(
+        message.from,
+        'Obrigado! Sua mensagem foi recebida e encaminhada para nossa equipe.'
+      );
+
+    } catch (error) {
+      console.error('Erro ao processar mensagem direta:', error);
+      await this.wahaService.sendTextMessage(
+        message.from,
+        'Ocorreu um erro ao processar sua mensagem. Tente novamente.'
+      );
+    }
   }
 
   private parseFormData(messageBody: string, formFields: FormField[]): Record<string, any> | null {
@@ -221,6 +249,41 @@ export class BotService {
     } catch (error) {
       console.error('Erro ao encaminhar para grupo:', error);
     }
+  }
+
+  private async forwardDirectMessageToGroup(
+    message: WhatsAppMessage,
+    config: BotConfig,
+    submission: FormSubmission
+  ): Promise<void> {
+    try {
+      // Criar mensagem formatada para o grupo
+      const formattedMessage = this.formatDirectMessageForGroup(submission, config);
+      
+      // Enviar mensagem formatada para o grupo
+      const result = await this.wahaService.sendTextMessage(config.targetGroupId, formattedMessage);
+      
+      if (result.success) {
+        submission.forwardedToGroup = true;
+        submission.forwardedAt = new Date();
+        this.submissions.set(submission.id, submission);
+      }
+    } catch (error) {
+      console.error('Erro ao encaminhar mensagem direta para grupo:', error);
+    }
+  }
+
+  private formatDirectMessageForGroup(submission: FormSubmission, config: BotConfig): string {
+    const timestamp = submission.submittedAt.toLocaleString('pt-BR');
+    const fromNumber = submission.from.replace('@c.us', '');
+    
+    let message = `📋 *Nova Mensagem Recebida*\n\n`;
+    message += `👤 *De:* ${fromNumber}\n`;
+    message += `⏰ *Data:* ${timestamp}\n\n`;
+    message += `💬 *Mensagem:*\n`;
+    message += `${submission.formData.mensagem}`;
+
+    return message;
   }
 
   private formatMessageForGroup(submission: FormSubmission, config: BotConfig): string {
