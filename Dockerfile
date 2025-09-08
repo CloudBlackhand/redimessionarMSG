@@ -21,9 +21,8 @@ RUN cd frontend && npm run build
 # Build backend
 RUN npm run build
 
-# Remove dev dependencies after build
-RUN npm prune --omit=dev
-RUN cd frontend && npm prune --omit=dev
+# Remove only frontend dev dependencies (keep TypeScript in backend)
+RUN cd frontend && npm uninstall @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-plugin-react-hooks eslint-plugin-react-refresh autoprefixer postcss tailwindcss typescript vite
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
