@@ -9,8 +9,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "dev:frontend": "cd frontend && npm run dev",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "install:all": "npm install && cd frontend && npm install",
-    "postinstall": "npm run build:frontend"
+    "install:all": "npm install && cd frontend && npm install"
   },
   "keywords": ["whatsapp", "bot", "waha", "railway"],
   "author": "Sistema WhatsApp Bot",

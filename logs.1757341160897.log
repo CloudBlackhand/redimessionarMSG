@@ -1,0 +1,137 @@
+2025-09-08T14:18:56.568977196Z [inf]  
+2025-09-08T14:18:57.711646928Z [inf]  [35m[Region: us-east4][0m
+2025-09-08T14:18:57.722722301Z [inf]  [35m=========================
+2025-09-08T14:18:57.722756374Z [inf]  Using Detected Dockerfile
+2025-09-08T14:18:57.722763455Z [inf]  =========================
+2025-09-08T14:18:57.722772769Z [inf]  [0m
+2025-09-08T14:18:57.722790560Z [inf]  context: fk4b-eUJN
+2025-09-08T14:18:57.906643075Z [inf]  [internal] load build definition from Dockerfile
+2025-09-08T14:18:57.906737634Z [inf]  [internal] load build definition from Dockerfile
+2025-09-08T14:18:57.906756954Z [inf]  [internal] load build definition from Dockerfile
+2025-09-08T14:18:57.917451407Z [inf]  [internal] load build definition from Dockerfile
+2025-09-08T14:18:57.919196087Z [inf]  [internal] load metadata for docker.io/library/node:18-alpine
+2025-09-08T14:18:58.166595863Z [inf]  [internal] load metadata for docker.io/library/node:18-alpine
+2025-09-08T14:18:58.167068175Z [inf]  [internal] load .dockerignore
+2025-09-08T14:18:58.167100175Z [inf]  [internal] load .dockerignore
+2025-09-08T14:18:58.167395873Z [inf]  [internal] load .dockerignore
+2025-09-08T14:18:58.177506498Z [inf]  [internal] load .dockerignore
+2025-09-08T14:18:58.182320234Z [inf]  [10/14] RUN npm uninstall ts-node-dev
+2025-09-08T14:18:58.182366619Z [inf]  [ 9/14] RUN npm run build
+2025-09-08T14:18:58.182389009Z [inf]  [ 8/14] RUN cd frontend && npm run build
+2025-09-08T14:18:58.182406924Z [inf]  [ 7/14] COPY . .
+2025-09-08T14:18:58.182420797Z [inf]  [ 6/14] RUN cd frontend && npm install
+2025-09-08T14:18:58.182430965Z [inf]  [ 5/14] RUN npm install
+2025-09-08T14:18:58.182440927Z [inf]  [ 4/14] COPY frontend/package*.json ./frontend/
+2025-09-08T14:18:58.182449682Z [inf]  [ 3/14] COPY package*.json ./
+2025-09-08T14:18:58.182458039Z [inf]  [internal] load build context
+2025-09-08T14:18:58.182466991Z [inf]  [ 2/14] WORKDIR /app
+2025-09-08T14:18:58.182477989Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.182530908Z [inf]  [14/14] RUN chown -R nodejs:nodejs /app
+2025-09-08T14:18:58.182544942Z [inf]  [13/14] RUN adduser -S nodejs -u 1001
+2025-09-08T14:18:58.182556455Z [inf]  [12/14] RUN addgroup -g 1001 -S nodejs
+2025-09-08T14:18:58.182569477Z [inf]  [11/14] RUN cd frontend && rm -rf node_modules
+2025-09-08T14:18:58.182598352Z [inf]  [internal] load build context
+2025-09-08T14:18:58.182660704Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.189007597Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.189061267Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.189181896Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.189211257Z [inf]  [internal] load build context
+2025-09-08T14:18:58.217005061Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.219443232Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:58.226949502Z [inf]  [internal] load build context
+2025-09-08T14:18:58.764203297Z [inf]  [ 1/14] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-09-08T14:18:59.664300027Z [inf]  [ 2/14] WORKDIR /app
+2025-09-08T14:18:59.837278265Z [inf]  [ 2/14] WORKDIR /app
+2025-09-08T14:18:59.840738856Z [inf]  [ 3/14] COPY package*.json ./
+2025-09-08T14:18:59.871145144Z [inf]  [ 3/14] COPY package*.json ./
+2025-09-08T14:18:59.872170918Z [inf]  [ 4/14] COPY frontend/package*.json ./frontend/
+2025-09-08T14:18:59.891918653Z [inf]  [ 4/14] COPY frontend/package*.json ./frontend/
+2025-09-08T14:18:59.892830298Z [inf]  [ 5/14] RUN npm install
+2025-09-08T14:19:01.76149869Z [inf]  npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+
+2025-09-08T14:19:01.922268151Z [inf]  npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+
+2025-09-08T14:19:01.968717293Z [inf]  npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+
+2025-09-08T14:19:02.101775507Z [inf]  npm warn deprecated multer@1.4.5-lts.2: Multer 1.x is impacted by a number of vulnerabilities, which have been patched in 2.x. You should upgrade to the latest 2.x version.
+
+2025-09-08T14:19:02.669996413Z [inf]  
+> whatsapp-bot-config@1.0.0 postinstall
+> npm run build:frontend
+
+
+2025-09-08T14:19:02.865104902Z [inf]  
+> whatsapp-bot-config@1.0.0 build:frontend
+> cd frontend && npm install && npm run build
+
+
+2025-09-08T14:19:04.424518472Z [inf]  npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+
+2025-09-08T14:19:04.566868482Z [inf]  npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+
+2025-09-08T14:19:05.149215952Z [inf]  npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+
+2025-09-08T14:19:05.578191578Z [inf]  npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+
+2025-09-08T14:19:05.602643265Z [inf]  npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+
+2025-09-08T14:19:07.103695959Z [inf]  npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+2025-09-08T14:19:07.69698295Z [inf]  
+added 305 packages, and audited 306 packages in 5s
+
+73 packages are looking for funding
+
+2025-09-08T14:19:07.697023532Z [inf]    run `npm fund` for details
+
+2025-09-08T14:19:07.709454331Z [inf]  
+2 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+2025-09-08T14:19:07.903717586Z [inf]  
+> whatsapp-bot-frontend@1.0.0 build
+> vite build
+
+
+2025-09-08T14:19:08.120543236Z [inf]  vite v5.4.20 building for production...
+
+2025-09-08T14:19:08.162549437Z [inf]  ✓ 0 modules transformed.
+
+2025-09-08T14:19:08.164894549Z [inf]  x Build failed in 12ms
+
+2025-09-08T14:19:08.164974703Z [inf]  error during build:
+Could not resolve entry module "index.html".
+    at getRollupError (file:///app/frontend/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///app/frontend/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at ModuleLoader.loadEntryModule (file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21560:20)
+    at async Promise.all (index 0)
+
+2025-09-08T14:19:08.196866016Z [inf]  npm error code 1
+npm error path /app
+
+2025-09-08T14:19:08.196889122Z [inf]  npm error command failed
+
+2025-09-08T14:19:08.197037474Z [inf]  npm error command sh -c npm run build:frontend
+
+2025-09-08T14:19:08.198281318Z [inf]  npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.6.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.0
+npm notice To update run: npm install -g npm@11.6.0
+npm notice
+
+2025-09-08T14:19:08.198474182Z [inf]  npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-08T14_19_00_065Z-debug-0.log
+
+2025-09-08T14:19:08.813678388Z [err]  [ 5/14] RUN npm install
+2025-09-08T14:19:08.830536684Z [err]  Dockerfile:12
+2025-09-08T14:19:08.830599682Z [err]  -------------------
+2025-09-08T14:19:08.830607612Z [err]  10 |
+2025-09-08T14:19:08.830622014Z [err]  11 |     # Install all dependencies (including dev for build)
+2025-09-08T14:19:08.830631280Z [err]  12 | >>> RUN npm install
+2025-09-08T14:19:08.830639238Z [err]  13 |     RUN cd frontend && npm install
+2025-09-08T14:19:08.830646264Z [err]  14 |
+2025-09-08T14:19:08.830653327Z [err]  -------------------
+2025-09-08T14:19:08.830661944Z [err]  ERROR: failed to build: failed to solve: process "/bin/sh -c npm install" did not complete successfully: exit code: 1
