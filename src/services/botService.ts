@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { WahaService } from './wahaService';
 import { BotConfig, FormSubmission, WhatsAppMessage, FormField } from '../types';
+import { botConfigRepository } from '../repositories/botConfigRepository';
+import { submissionRepository } from '../repositories/submissionRepository';
 
 export class BotService {
   private wahaService: WahaService;
@@ -60,7 +62,7 @@ export class BotService {
   async handleMessage(message: WhatsAppMessage): Promise<void> {
     if (message.fromMe) return;
 
-    const config = this.getActiveConfig();
+    const config = await this.getActiveConfig();
     if (!config) {
       console.log('Nenhuma configuração ativa encontrada');
       return;
@@ -305,7 +307,18 @@ export class BotService {
   }
 
   // Métodos de configuração
-  getActiveConfig(): BotConfig | null {
+  async getActiveConfig(): Promise<BotConfig | null> {
+    try {
+      const dbConfig = await botConfigRepository.getActive();
+      if (dbConfig) {
+        this.configs.set(dbConfig.id, dbConfig);
+        return dbConfig;
+      }
+    } catch (error) {
+      console.error('Erro ao buscar configuração ativa do banco:', error);
+    }
+    
+    // Fallback para memória
     for (const config of this.configs.values()) {
       if (config.isActive) {
         return config;
@@ -314,15 +327,50 @@ export class BotService {
     return null;
   }
 
-  getAllConfigs(): BotConfig[] {
+  async getAllConfigs(): Promise<BotConfig[]> {
+    try {
+      const dbConfigs = await botConfigRepository.getAll();
+      if (dbConfigs.length > 0) {
+        // Sincronizar com memória
+        this.configs.clear();
+        dbConfigs.forEach(config => this.configs.set(config.id, config));
+        return dbConfigs;
+      }
+    } catch (error) {
+      console.error('Erro ao buscar configurações do banco:', error);
+    }
+    
+    // Fallback para memória
     return Array.from(this.configs.values());
   }
 
-  getConfig(id: string): BotConfig | null {
+  async getConfig(id: string): Promise<BotConfig | null> {
+    try {
+      const dbConfig = await botConfigRepository.getById(id);
+      if (dbConfig) {
+        this.configs.set(id, dbConfig);
+        return dbConfig;
+      }
+    } catch (error) {
+      console.error('Erro ao buscar configuração do banco:', error);
+    }
+    
+    // Fallback para memória
     return this.configs.get(id) || null;
   }
 
-  updateConfig(id: string, updates: Partial<BotConfig>): BotConfig | null {
+  async updateConfig(id: string, updates: Partial<BotConfig>): Promise<BotConfig | null> {
+    try {
+      const dbConfig = await botConfigRepository.update(id, updates);
+      if (dbConfig) {
+        this.configs.set(id, dbConfig);
+        return dbConfig;
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar configuração no banco:', error);
+    }
+    
+    // Fallback para memória
     const config = this.configs.get(id);
     if (!config) return null;
 
@@ -336,7 +384,16 @@ export class BotService {
     return updatedConfig;
   }
 
-  createConfig(configData: Omit<BotConfig, 'id' | 'createdAt' | 'updatedAt'>): BotConfig {
+  async createConfig(configData: Omit<BotConfig, 'id' | 'createdAt' | 'updatedAt'>): Promise<BotConfig> {
+    try {
+      const dbConfig = await botConfigRepository.create(configData);
+      this.configs.set(dbConfig.id, dbConfig);
+      return dbConfig;
+    } catch (error) {
+      console.error('Erro ao criar configuração no banco:', error);
+    }
+    
+    // Fallback para memória
     const newConfig: BotConfig = {
       ...configData,
       id: uuidv4(),
@@ -348,7 +405,18 @@ export class BotService {
     return newConfig;
   }
 
-  deleteConfig(id: string): boolean {
+  async deleteConfig(id: string): Promise<boolean> {
+    try {
+      const deleted = await botConfigRepository.delete(id);
+      if (deleted) {
+        this.configs.delete(id);
+        return true;
+      }
+    } catch (error) {
+      console.error('Erro ao deletar configuração do banco:', error);
+    }
+    
+    // Fallback para memória
     return this.configs.delete(id);
   }
 

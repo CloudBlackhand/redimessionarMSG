@@ -6,6 +6,7 @@ import path from 'path';
 import { config } from './config';
 import apiRoutes from './routes/api';
 import webhookRoutes from './routes/webhook';
+import { databaseService } from './services/database';
 
 const app = express();
 
@@ -63,28 +64,49 @@ app.use('*', (req, res) => {
   });
 });
 
-// Iniciar servidor
-const PORT = config.port;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
-  console.log(`📱 Ambiente: ${config.nodeEnv}`);
-  console.log(`🔗 WAHA URL: ${config.waha.baseUrl}`);
-  console.log(`🤖 Sessão: ${config.waha.sessionName}`);
-  console.log(`🌐 Frontend: http://localhost:${PORT}`);
-  console.log(`📡 API: http://localhost:${PORT}/api`);
-  console.log(`🔔 Webhook: http://localhost:${PORT}/webhook`);
-});
+// Inicializar banco de dados
+async function initializeDatabase() {
+  try {
+    await databaseService.connect();
+  } catch (error) {
+    console.error('Erro ao inicializar banco de dados:', error);
+  }
+}
+
+// Inicializar aplicação
+async function startServer() {
+  await initializeDatabase();
+  
+  const server = app.listen(config.port, () => {
+    console.log('🚀 Servidor rodando na porta', config.port);
+    console.log('📱 Ambiente:', config.nodeEnv);
+    console.log('🔗 WAHA URL:', config.waha.baseUrl);
+    console.log('🤖 Sessão:', config.waha.sessionName);
+    console.log('🌐 Frontend:', `http://localhost:${config.port}`);
+    console.log('📡 API:', `http://localhost:${config.port}/api`);
+    console.log('🔔 Webhook:', `http://localhost:${config.port}/webhook`);
+  });
+
+  return server;
+}
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
   console.log('🛑 Recebido SIGTERM, encerrando servidor...');
+  await databaseService.disconnect();
   process.exit(0);
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   console.log('🛑 Recebido SIGINT, encerrando servidor...');
+  await databaseService.disconnect();
   process.exit(0);
 });
+
+// Iniciar servidor se não estiver em modo de teste
+if (require.main === module) {
+  startServer().catch(console.error);
+}
 
 export default app;

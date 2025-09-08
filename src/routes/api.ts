@@ -46,9 +46,9 @@ const botConfigSchema = Joi.object({
 });
 
 // Rotas de configuração do bot
-router.get('/configs', authenticateApiKey, (req: Request, res: Response) => {
+router.get('/configs', authenticateApiKey, async (req: Request, res: Response) => {
   try {
-    const configs = botService.getAllConfigs();
+    const configs = await botService.getAllConfigs();
     const response: ApiResponse<BotConfig[]> = {
       success: true,
       data: configs,
@@ -63,7 +63,7 @@ router.get('/configs', authenticateApiKey, (req: Request, res: Response) => {
   }
 });
 
-router.get('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
+router.get('/configs/:id', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!id) {
@@ -74,7 +74,7 @@ router.get('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
       return res.status(400).json(response);
     }
     
-    const config = botService.getConfig(id);
+    const config = await botService.getConfig(id);
     
     if (!config) {
       const response: ApiResponse = {
@@ -98,7 +98,7 @@ router.get('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
   }
 });
 
-router.post('/configs', authenticateApiKey, (req: Request, res: Response) => {
+router.post('/configs', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const { error, value } = botConfigSchema.validate(req.body);
     
@@ -110,7 +110,7 @@ router.post('/configs', authenticateApiKey, (req: Request, res: Response) => {
       return res.status(400).json(response);
     }
 
-    const config = botService.createConfig(value);
+    const config = await botService.createConfig(value);
     const response: ApiResponse<BotConfig> = {
       success: true,
       data: config,
@@ -126,7 +126,7 @@ router.post('/configs', authenticateApiKey, (req: Request, res: Response) => {
   }
 });
 
-router.put('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
+router.put('/configs/:id', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!id) {
@@ -147,7 +147,7 @@ router.put('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
       return res.status(400).json(response);
     }
 
-    const config = botService.updateConfig(id, value);
+    const config = await botService.updateConfig(id, value);
     
     if (!config) {
       const response: ApiResponse = {
@@ -172,7 +172,7 @@ router.put('/configs/:id', authenticateApiKey, (req: Request, res: Response) => 
   }
 });
 
-router.delete('/configs/:id', authenticateApiKey, (req: Request, res: Response) => {
+router.delete('/configs/:id', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!id) {
@@ -183,7 +183,7 @@ router.delete('/configs/:id', authenticateApiKey, (req: Request, res: Response) 
       return res.status(400).json(response);
     }
     
-    const deleted = botService.deleteConfig(id);
+    const deleted = await botService.deleteConfig(id);
     
     if (!deleted) {
       const response: ApiResponse = {
