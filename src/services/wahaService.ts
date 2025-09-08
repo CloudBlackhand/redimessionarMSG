@@ -218,6 +218,27 @@ export class WahaService {
     }
   }
 
+  async startSession(): Promise<ApiResponse> {
+    try {
+      const response = await this.client.post('/api/sessions', {
+        name: this.sessionName,
+        config: {
+          noweb: {
+            store: {
+              enabled: true,
+              fullSync: false
+            },
+            markOnline: true
+          }
+        }
+      });
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Erro ao iniciar sessão:', error);
+      return { success: false, error: 'Falha ao iniciar sessão' };
+    }
+  }
+
   async restartSession(): Promise<ApiResponse> {
     try {
       const response = await this.client.post(`/api/sessions/${this.sessionName}/restart`);

@@ -7,7 +7,8 @@ import {
   Clock,
   QrCode,
   Users,
-  MessageSquare
+  MessageSquare,
+  Play
 } from 'lucide-react';
 import { apiService } from '../services/api';
 import { WahaSession, Chat, Group } from '../types';
@@ -20,6 +21,7 @@ const WahaStatus = () => {
   const [qrCode, setQrCode] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isStarting, setIsStarting] = useState(false);
 
   useEffect(() => {
     loadWahaData();
@@ -77,6 +79,19 @@ const WahaStatus = () => {
       toast.error('Erro ao atualizar dados');
     } finally {
       setIsRefreshing(false);
+    }
+  };
+
+  const handleStartSession = async () => {
+    setIsStarting(true);
+    try {
+      await apiService.startSession();
+      toast.success('Sessão iniciada com sucesso');
+      await loadWahaData();
+    } catch (error) {
+      toast.error('Erro ao iniciar sessão');
+    } finally {
+      setIsStarting(false);
     }
   };
 
@@ -161,14 +176,26 @@ const WahaStatus = () => {
             Monitoramento da conexão WhatsApp
           </p>
         </div>
-        <button
-          onClick={handleRefresh}
-          disabled={isRefreshing}
-          className="btn btn-primary flex items-center"
-        >
-          <RefreshCw className={`h-5 w-5 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-          Atualizar
-        </button>
+        <div className="flex gap-2">
+          {wahaStatus?.status === 'STOPPED' && (
+            <button
+              onClick={handleStartSession}
+              disabled={isStarting}
+              className="btn btn-success flex items-center"
+            >
+              <Play className={`h-5 w-5 mr-2 ${isStarting ? 'animate-spin' : ''}`} />
+              {isStarting ? 'Iniciando...' : 'Iniciar Sessão'}
+            </button>
+          )}
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="btn btn-primary flex items-center"
+          >
+            <RefreshCw className={`h-5 w-5 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            Atualizar
+          </button>
+        </div>
       </div>
 
       {/* Status da Sessão */}

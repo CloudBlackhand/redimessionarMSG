@@ -125,6 +125,13 @@ export const apiService = {
     return response.data.data;
   },
 
+  startSession: async (): Promise<void> => {
+    const response = await api.post<ApiResponse>('/waha/start');
+    if (!response.data.success) {
+      throw new Error(response.data.error || 'Erro ao iniciar sessão');
+    }
+  },
+
   // Health check
   healthCheck: async (): Promise<{ timestamp: string; uptime: number }> => {
     const response = await api.get<ApiResponse<{ timestamp: string; uptime: number }>>('/health');

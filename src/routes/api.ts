@@ -296,6 +296,24 @@ router.post('/waha/session', authenticateApiKey, async (req: Request, res: Respo
   }
 });
 
+router.post('/waha/start', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const result = await wahaService.startSession();
+    const response: ApiResponse = {
+      success: result.success,
+      data: result.data,
+      message: result.success ? 'Sessão iniciada com sucesso' : 'Erro ao iniciar sessão',
+    };
+    res.status(result.success ? 200 : 500).json(response);
+  } catch (error) {
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao iniciar sessão WAHA',
+    };
+    res.status(500).json(response);
+  }
+});
+
 router.get('/waha/qr', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const qrCode = await wahaService.getQrCode();
