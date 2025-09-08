@@ -21,8 +21,8 @@ RUN cd frontend && npm run build
 # Build backend
 RUN npm run build
 
-# Keep TypeScript for runtime, remove only unnecessary dev deps
-RUN npm uninstall @types/express @types/cors @types/multer @types/uuid @types/compression @types/node ts-node-dev
+# Keep essential types for TypeScript compilation
+RUN npm uninstall ts-node-dev
 RUN cd frontend && rm -rf node_modules
 
 # Create non-root user
