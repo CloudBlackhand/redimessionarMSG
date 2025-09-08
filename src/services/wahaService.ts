@@ -228,4 +228,3 @@ export class WahaService {
     }
   }
 }
-// Force rebuild seg 08 set 2025 13:56:36 -03
