@@ -3,14 +3,16 @@ nixPkgs = ["nodejs-18_x", "npm-9_x"]
 
 [phases.install]
 cmds = [
-  "npm install --omit=dev",
-  "cd frontend && npm install --omit=dev"
+  "npm install",
+  "cd frontend && npm install"
 ]
 
 [phases.build]
 cmds = [
   "cd frontend && npm run build",
-  "npm run build"
+  "npm run build",
+  "npm prune --omit=dev",
+  "cd frontend && npm prune --omit=dev"
 ]
 
 [start]

@@ -8,9 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
-# Install dependencies
-RUN npm install --omit=dev
-RUN cd frontend && npm install --omit=dev
+# Install dependencies (including dev for build)
+RUN npm install
+RUN cd frontend && npm install
 
 # Copy source code
 COPY . .
@@ -20,6 +20,10 @@ RUN cd frontend && npm run build
 
 # Build backend
 RUN npm run build
+
+# Remove dev dependencies after build
+RUN npm prune --omit=dev
+RUN cd frontend && npm prune --omit=dev
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
