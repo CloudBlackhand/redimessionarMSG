@@ -20,10 +20,12 @@ export class WahaService {
 
   async getSessionStatus(): Promise<WahaSession> {
     try {
+      console.log(`🔍 Buscando status da sessão: ${this.sessionName}`);
       const response = await this.client.get(`/api/sessions/${this.sessionName}`);
+      console.log('✅ Status obtido com sucesso:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Erro ao obter status da sessão:', error);
+      console.error('❌ Erro ao obter status da sessão:', error);
       throw new Error('Falha ao conectar com WAHA');
     }
   }
