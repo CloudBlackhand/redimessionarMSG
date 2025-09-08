@@ -7,6 +7,7 @@ import { config } from './config';
 import apiRoutes from './routes/api';
 import webhookRoutes from './routes/webhook';
 import { databaseService } from './services/database';
+import { cleanupService } from './services/cleanupService';
 
 const app = express();
 
@@ -69,14 +70,26 @@ app.use('*', (req, res) => {
 async function initializeDatabase() {
   try {
     await databaseService.connect();
+    console.log('✅ Banco de dados conectado');
   } catch (error) {
     console.error('Erro ao inicializar banco de dados:', error);
+  }
+}
+
+// Inicializar serviços
+async function initializeServices() {
+  try {
+    // O cleanupService já é inicializado automaticamente no construtor
+    console.log('✅ Serviço de limpeza automática iniciado');
+  } catch (error) {
+    console.error('Erro ao inicializar serviços:', error);
   }
 }
 
 // Inicializar aplicação
 async function startServer() {
   await initializeDatabase();
+  await initializeServices();
   
   const server = app.listen(config.port, () => {
     console.log('🚀 Servidor rodando na porta', config.port);
@@ -94,12 +107,14 @@ async function startServer() {
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('🛑 Recebido SIGTERM, encerrando servidor...');
+  cleanupService.stop();
   await databaseService.disconnect();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('🛑 Recebido SIGINT, encerrando servidor...');
+  cleanupService.stop();
   await databaseService.disconnect();
   process.exit(0);
 });

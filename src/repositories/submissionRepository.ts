@@ -179,6 +179,15 @@ export class SubmissionRepository {
     return result.rowCount > 0;
   }
 
+  async deleteAll(): Promise<{ count: number }> {
+    if (!databaseService.isConnected()) {
+      return { count: 0 };
+    }
+
+    const result = await databaseService.query('DELETE FROM form_submissions');
+    return { count: result.rowCount || 0 };
+  }
+
   async getStats(): Promise<{
     totalSubmissions: number;
     submissionsByConfig: Array<{ configId: string; count: number }>;

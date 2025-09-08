@@ -189,6 +189,15 @@ export class BotConfigRepository {
     return result.rowCount > 0;
   }
 
+  async deleteAll(): Promise<{ count: number }> {
+    if (!databaseService.isConnected()) {
+      return { count: 0 };
+    }
+
+    const result = await databaseService.query('DELETE FROM bot_configs');
+    return { count: result.rowCount || 0 };
+  }
+
   async setActive(id: string): Promise<void> {
     if (!databaseService.isConnected()) {
       return;
