@@ -8,13 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 
-# Install dependencies with cache
-RUN npm ci --only=production --ignore-scripts
-RUN cd frontend && npm ci --only=production --ignore-scripts
-
-# Install dev dependencies for build
-RUN npm install --only=dev
-RUN cd frontend && npm install --only=dev
+# Install all dependencies (including dev for build)
+RUN npm install
+RUN cd frontend && npm install
 
 # Copy source code
 COPY . .
@@ -25,9 +21,9 @@ RUN cd frontend && npm run build
 # Build backend
 RUN npm run build
 
-# Clean up dev dependencies
-RUN npm prune --production
-RUN cd frontend && npm prune --production
+# Keep TypeScript for runtime, remove only unnecessary dev deps
+RUN npm uninstall @types/express @types/cors @types/multer @types/uuid @types/compression @types/node ts-node-dev
+RUN cd frontend && rm -rf node_modules
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
