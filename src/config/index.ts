@@ -15,6 +15,7 @@ export const config = {
   bot: {
     greetingMessage: process.env.BOT_GREETING_MESSAGE || 'Olá! Como posso ajudá-lo hoje?',
     formMessage: process.env.BOT_FORM_MESSAGE || 'Por favor, preencha o formulário abaixo:',
+    redirectGroupLink: process.env.WHATSAPP_GROUP_LINK || 'https://chat.whatsapp.com/D7ydQcfV2k78V3vRht0Mek',
   },
   
   security: {

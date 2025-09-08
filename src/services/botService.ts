@@ -3,6 +3,7 @@ import { WahaService } from './wahaService';
 import { BotConfig, FormSubmission, WhatsAppMessage, FormField } from '../types';
 import { botConfigRepository } from '../repositories/botConfigRepository';
 import { submissionRepository } from '../repositories/submissionRepository';
+import { config } from '../config';
 
 export class BotService {
   private wahaService: WahaService;
@@ -18,8 +19,8 @@ export class BotService {
     const defaultConfig: BotConfig = {
       id: 'default',
       name: 'Bot Padrão',
-      greetingMessage: 'Olá! Como posso ajudá-lo hoje?',
-      formMessage: 'Por favor, preencha o formulário abaixo:',
+      greetingMessage: config.bot.greetingMessage,
+      formMessage: config.bot.formMessage,
       formFields: [
         {
           id: 'name',
@@ -50,7 +51,7 @@ export class BotService {
           required: false,
         },
       ],
-      targetGroupId: '',
+      targetGroupId: config.bot.redirectGroupLink,
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date(),
