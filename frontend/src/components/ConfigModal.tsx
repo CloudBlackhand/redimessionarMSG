@@ -21,12 +21,10 @@ const ConfigModal = ({ isOpen, onClose, onSave, config }: ConfigModalProps) => {
     isActive: true,
   });
   const [formFields, setFormFields] = useState<FormField[]>([]);
-  const [availableGroups, setAvailableGroups] = useState<any[]>([]);
-  const [isLoadingGroups, setIsLoadingGroups] = useState(false);
+  // Removido: não precisamos mais carregar grupos
 
   useEffect(() => {
     if (isOpen) {
-      loadGroups();
       if (config) {
         setFormData({
           name: config.name,
@@ -66,18 +64,7 @@ const ConfigModal = ({ isOpen, onClose, onSave, config }: ConfigModalProps) => {
     }
   }, [isOpen, config]);
 
-  const loadGroups = async () => {
-    try {
-      setIsLoadingGroups(true);
-      const groups = await apiService.getGroups();
-      setAvailableGroups(groups);
-    } catch (error) {
-      console.error('Erro ao carregar grupos:', error);
-      toast.error('Erro ao carregar grupos do WhatsApp');
-    } finally {
-      setIsLoadingGroups(false);
-    }
-  };
+  // Removido: função loadGroups não é mais necessária
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,15 +74,23 @@ const ConfigModal = ({ isOpen, onClose, onSave, config }: ConfigModalProps) => {
       return;
     }
 
+    // Não precisamos validar o grupo, pois será usado o grupo padrão do env
+
     if (formFields.length === 0) {
       toast.error('Adicione pelo menos um campo ao formulário');
       return;
     }
 
-    onSave({
-      ...formData,
+    const configToSave = {
+      name: formData.name,
+      greetingMessage: formData.greetingMessage,
+      formMessage: formData.formMessage,
+      isActive: formData.isActive,
       formFields,
-    });
+      // Não enviamos targetGroupId e targetGroupName - serão definidos automaticamente no backend
+    };
+    console.log('💾 Dados que serão salvos:', configToSave);
+    onSave(configToSave);
   };
 
   const addFormField = () => {
@@ -204,33 +199,13 @@ const ConfigModal = ({ isOpen, onClose, onSave, config }: ConfigModalProps) => {
                   />
                 </div>
 
-                {/* Grupo de destino */}
+                {/* Grupo de destino - informativo */}
                 <div className="form-group">
                   <label className="label">Grupo de Destino</label>
-                  <div className="space-y-2">
-                    <select
-                      className="input"
-                      value={formData.targetGroupId}
-                      onChange={(e) => {
-                        const selectedGroup = availableGroups.find(g => g.id === e.target.value);
-                        setFormData({
-                          ...formData,
-                          targetGroupId: e.target.value,
-                          targetGroupName: selectedGroup?.name || '',
-                        });
-                      }}
-                      disabled={isLoadingGroups}
-                    >
-                      <option value="">Selecione um grupo</option>
-                      {availableGroups.map((group) => (
-                        <option key={group.id} value={group.id}>
-                          {group.name} ({group.participantsCount} participantes)
-                        </option>
-                      ))}
-                    </select>
-                    {isLoadingGroups && (
-                      <p className="text-sm text-gray-500">Carregando grupos...</p>
-                    )}
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-sm text-blue-800">
+                      <strong>Grupo Padrão:</strong> As mensagens serão redirecionadas automaticamente para o grupo configurado no sistema.
+                    </p>
                   </div>
                 </div>
 

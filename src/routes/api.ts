@@ -40,7 +40,7 @@ const botConfigSchema = Joi.object({
   greetingMessage: Joi.string().required(),
   formMessage: Joi.string().required(),
   formFields: Joi.array().items(formFieldSchema).required(),
-  targetGroupId: Joi.string().required(),
+  targetGroupId: Joi.string().optional(),
   targetGroupName: Joi.string().optional(),
   isActive: Joi.boolean().required(),
 });
@@ -207,16 +207,55 @@ router.delete('/configs/:id', authenticateApiKey, async (req: Request, res: Resp
   }
 });
 
-// Rotas de submissões
-router.get('/submissions', authenticateApiKey, (req: Request, res: Response) => {
+// Rota de estatísticas/métricas
+router.get('/stats', authenticateApiKey, async (req: Request, res: Response) => {
   try {
-    const submissions = botService.getAllSubmissions();
+    const configs = await botService.getAllConfigs();
+    const submissions = await botService.getAllSubmissions();
+    
+    const activeConfigs = configs.filter(config => config.isActive).length;
+    const totalSubmissions = submissions.length;
+    
+    // Calcular submissões de hoje
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const submissionsToday = submissions.filter(submission => 
+      new Date(submission.submittedAt) >= today
+    ).length;
+    
+    const stats = {
+      activeConfigs,
+      totalSubmissions,
+      submissionsToday,
+      totalConfigs: configs.length
+    };
+    
+    const response: ApiResponse = {
+      success: true,
+      data: stats,
+    };
+    res.json(response);
+  } catch (error) {
+    console.error('Erro ao obter estatísticas:', error);
+    const response: ApiResponse = {
+      success: false,
+      error: 'Erro ao obter estatísticas',
+    };
+    res.status(500).json(response);
+  }
+});
+
+// Rotas de submissões
+router.get('/submissions', authenticateApiKey, async (req: Request, res: Response) => {
+  try {
+    const submissions = await botService.getAllSubmissions();
     const response: ApiResponse = {
       success: true,
       data: submissions,
     };
     res.json(response);
   } catch (error) {
+    console.error('Erro ao obter submissões:', error);
     const response: ApiResponse = {
       success: false,
       error: 'Erro ao obter submissões',
@@ -225,7 +264,7 @@ router.get('/submissions', authenticateApiKey, (req: Request, res: Response) => 
   }
 });
 
-router.get('/submissions/:id', authenticateApiKey, (req: Request, res: Response) => {
+router.get('/submissions/:id', authenticateApiKey, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     if (!id) {
@@ -236,7 +275,7 @@ router.get('/submissions/:id', authenticateApiKey, (req: Request, res: Response)
       return res.status(400).json(response);
     }
     
-    const submission = botService.getSubmission(id);
+    const submission = await botService.getSubmission(id);
     
     if (!submission) {
       const response: ApiResponse = {

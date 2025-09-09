@@ -35,7 +35,9 @@ api.interceptors.response.use(
 export const apiService = {
   // Configurações do Bot
   getConfigs: async (): Promise<BotConfig[]> => {
+    console.log('🌐 Fazendo requisição para /configs');
     const response = await api.get<ApiResponse<BotConfig[]>>('/configs');
+    console.log('📡 Resposta da API:', response.data);
     return response.data.data || [];
   },
 
@@ -48,7 +50,9 @@ export const apiService = {
   },
 
   createConfig: async (config: Omit<BotConfig, 'id' | 'createdAt' | 'updatedAt'>): Promise<BotConfig> => {
+    console.log('🚀 Enviando configuração para API:', config);
     const response = await api.post<ApiResponse<BotConfig>>('/configs', config);
+    console.log('📨 Resposta da API:', response.data);
     if (!response.data.success || !response.data.data) {
       throw new Error(response.data.error || 'Erro ao criar configuração');
     }

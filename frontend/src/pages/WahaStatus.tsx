@@ -30,11 +30,18 @@ const WahaStatus = () => {
   const loadWahaData = async () => {
     try {
       setIsLoading(true);
-      await Promise.all([
-        loadStatus(),
-        loadChats(),
-        loadGroups(),
-      ]);
+      
+      // Sempre carrega o status primeiro
+      const status = await apiService.getWahaStatus();
+      setWahaStatus(status);
+      
+      // Só carrega chats e grupos se a sessão estiver funcionando
+      if (status?.status === 'STARTED' || status?.status === 'WORKING') {
+        await Promise.all([
+          loadChats(),
+          loadGroups(),
+        ]);
+      }
     } catch (error) {
       console.error('Erro ao carregar dados do WAHA:', error);
       toast.error('Erro ao carregar dados do WAHA');
@@ -219,7 +226,7 @@ const WahaStatus = () => {
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-700">Engine</label>
-                <p className="text-sm text-gray-900">{wahaStatus.engine}</p>
+                <p className="text-sm text-gray-900">{wahaStatus.engine?.engine || 'N/A'}</p>
               </div>
             </div>
 

@@ -18,10 +18,12 @@ const Configs = () => {
   const loadConfigs = async () => {
     try {
       setIsLoading(true);
+      console.log('🔄 Carregando configurações...');
       const data = await apiService.getConfigs();
+      console.log('✅ Configurações carregadas:', data);
       setConfigs(data);
     } catch (error) {
-      console.error('Erro ao carregar configurações:', error);
+      console.error('❌ Erro ao carregar configurações:', error);
       toast.error('Erro ao carregar configurações');
     } finally {
       setIsLoading(false);

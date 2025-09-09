@@ -386,8 +386,15 @@ export class BotService {
   }
 
   async createConfig(configData: Omit<BotConfig, 'id' | 'createdAt' | 'updatedAt'>): Promise<BotConfig> {
+    // Usar o grupo do env se não for fornecido
+    const configWithGroup = {
+      ...configData,
+      targetGroupId: configData.targetGroupId || 'default-group',
+      targetGroupName: configData.targetGroupName || 'Grupo Padrão',
+    };
+
     try {
-      const dbConfig = await botConfigRepository.create(configData);
+      const dbConfig = await botConfigRepository.create(configWithGroup);
       this.configs.set(dbConfig.id, dbConfig);
       return dbConfig;
     } catch (error) {
@@ -396,7 +403,7 @@ export class BotService {
     
     // Fallback para memória
     const newConfig: BotConfig = {
-      ...configData,
+      ...configWithGroup,
       id: uuidv4(),
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -422,11 +429,27 @@ export class BotService {
   }
 
   // Métodos de submissões
-  getAllSubmissions(): FormSubmission[] {
-    return Array.from(this.submissions.values());
+  async getAllSubmissions(): Promise<FormSubmission[]> {
+    try {
+      const dbSubmissions = await submissionRepository.getAll();
+      return dbSubmissions;
+    } catch (error) {
+      console.error('Erro ao obter submissões do banco:', error);
+      // Fallback para memória
+      return Array.from(this.submissions.values());
+    }
   }
 
-  getSubmission(id: string): FormSubmission | null {
+  async getSubmission(id: string): Promise<FormSubmission | null> {
+    try {
+      const dbSubmission = await submissionRepository.getById(id);
+      if (dbSubmission) {
+        return dbSubmission;
+      }
+    } catch (error) {
+      console.error('Erro ao obter submissão do banco:', error);
+    }
+    // Fallback para memória
     return this.submissions.get(id) || null;
   }
 
